@@ -12,7 +12,7 @@ const getLogClassName = status => cn({
 
 const getCurrentTime = () => new Date().toLocaleTimeString('ru-Ru');
 
-const Log = ({text, status, time}) => {
+const Log = ({ text, status, time }) => {
     return (
         <div>
             <span className={styles.logTime}>{time}</span>
@@ -20,7 +20,7 @@ const Log = ({text, status, time}) => {
             <span className={getLogClassName(status)}>{text}</span>
         </div>
     );
-} 
+}
 
 class ChainPlayground extends React.Component {
     constructor(props) {
@@ -32,32 +32,32 @@ class ChainPlayground extends React.Component {
         }
     }
 
-    handleTextChange = ({target}) => {
-        this.setState({textFieldValue: target.value})
+    handleTextChange = ({ target }) => {
+        this.setState({ textFieldValue: target.value })
     }
 
     writeLog = (value) => {
-        const {logs} = this.state;
-        logs.push({text: value, time: getCurrentTime()});
+        const { logs } = this.state;
+        logs.push({ text: value, time: getCurrentTime() });
 
-        this.setState({logs});
+        this.setState({ logs });
     }
 
     handleSuccess = (value) => {
-        const {logs} = this.state;
-        logs.push({text: value, status: 'success', time: getCurrentTime()});
+        const { logs } = this.state;
+        logs.push({ text: value, status: 'success', time: getCurrentTime() });
 
-        this.setState({logs});
+        this.setState({ logs });
     }
 
     handleError = (value) => {
-        const {logs} = this.state;
-        logs.push({text: value, status: 'error', time: getCurrentTime()});
+        const { logs } = this.state;
+        logs.push({ text: value, status: 'error', time: getCurrentTime() });
 
-        this.setState({logs});
+        this.setState({ logs });
     }
-    
-    
+
+
     handleRunButtonClick = () => {
         processSequence({
             value: this.state.textFieldValue,
@@ -68,16 +68,16 @@ class ChainPlayground extends React.Component {
     }
 
     clearLog = () => {
-        this.setState({logs: []});
+        this.setState({ logs: [] });
     }
 
     render() {
-        const {logs, textFieldValue} = this.state;
-         return (
+        const { logs, textFieldValue } = this.state;
+        return (
             <div>
                 <ol className={styles.description}>
                     <li>Берем строку N. Пишем изначальную строку в <i>writeLog</i>.</li>
-                    <li>Строка валидируется по следующим правилам: 
+                    <li>Строка валидируется по следующим правилам:
                         <ul>
                             <li>кол-во символов в числе должно быть меньше 10.</li>
                             <li>кол-во символов в числе должно быть больше 2.</li>
@@ -112,15 +112,15 @@ params:
 
 GET / https://animals.tech/{id}`}
                 </pre>
-        
+
                 <div className={styles.initSection}>
-                    <TextField 
+                    <TextField
                         id="standard-basic"
                         label="Число N"
                         onChange={this.handleTextChange}
                         value={textFieldValue}
                     />
-        
+
                     <div className={styles.initButton}>
                         <Button
                             onClick={this.handleRunButtonClick}
@@ -131,7 +131,7 @@ GET / https://animals.tech/{id}`}
                             ➤
                         </Button>
                     </div>
-        
+
                     <div className={styles.initButton}>
                         <Button
                             onClick={this.clearLog}
@@ -143,8 +143,8 @@ GET / https://animals.tech/{id}`}
                         </Button>
                     </div>
                 </div>
-    
-                {logs.map(({text, status, time}, i) => (
+
+                {logs.map(({ text, status, time }, i) => (
                     <Log key={i} text={text} time={time} status={status} />
                 ))}
             </div>
